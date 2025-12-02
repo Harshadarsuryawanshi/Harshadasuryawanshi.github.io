@@ -7,21 +7,25 @@
 
   <style>
     :root {
-      --bg: #f5f5f7;
+      --bg: radial-gradient(circle at top, #e4f0ff 0, #f7f7fb 45%, #ffffff 100%);
       --bg-card: #ffffff;
-      --text-main: #1f2933;
+      --text-main: #131826;
       --text-muted: #5f6c80;
       --accent: #0b5ed7;
-      --border: #dde1eb;
+      --accent-soft: rgba(11, 94, 215, 0.08);
+      --border: #d3d9ea;
+      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.08);
     }
 
     body.dark {
-      --bg: #050816;
-      --bg-card: #111827;
+      --bg: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      --bg-card: #0b1220;
       --text-main: #e5e7f3;
       --text-muted: #9ca3c9;
       --accent: #60a5fa;
+      --accent-soft: rgba(96, 165, 250, 0.12);
       --border: #1f2937;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
     }
 
     * {
@@ -46,7 +50,7 @@
     }
 
     .page {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 24px 16px 40px;
     }
@@ -65,21 +69,24 @@
       padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: rgba(255, 255, 255, 0.1);
       font-size: 0.8rem;
       cursor: pointer;
       color: var(--text-main);
+      backdrop-filter: blur(10px);
     }
 
     /* Hero */
     .hero {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 20px;
-      padding: 20px 20px 22px;
-      border-radius: 18px;
-      background: var(--bg-card);
+      gap: 22px;
+      padding: 22px 22px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent-soft), transparent 55%),
+                  var(--bg-card);
       border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
       margin-bottom: 28px;
       align-items: center;
     }
@@ -90,7 +97,7 @@
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid var(--border);
-      background: #ddd;
+      background: #cbd5f5;
       flex-shrink: 0;
     }
 
@@ -103,24 +110,25 @@
 
     .hero-main h1 {
       margin: 0 0 4px;
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 650;
+      letter-spacing: 0.03em;
     }
 
     .hero-role {
       font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .hero-text {
       font-size: 0.95rem;
       color: var(--text-muted);
-      max-width: 36rem;
+      max-width: 38rem;
     }
 
     .hero-links {
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 0.9rem;
       display: flex;
       flex-wrap: wrap;
@@ -131,35 +139,55 @@
       text-decoration: none;
       border-radius: 999px;
       border: 1px solid var(--border);
-      padding: 4px 10px;
+      padding: 4px 12px;
       font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    body.dark .hero-links a {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-links a.primary-link {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .hero-links a.primary-link:hover {
+      text-decoration: none;
+      filter: brightness(1.03);
     }
 
     /* Nav */
     nav {
-      margin: 10px 0 18px;
+      margin: 12px 0 20px;
       font-size: 0.9rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 16px;
     }
 
     nav a {
       text-decoration: none;
       color: var(--text-muted);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
     }
 
     nav a:hover {
       color: var(--accent);
+      border-color: var(--accent-soft);
     }
 
     /* Sections */
     section {
       background: var(--bg-card);
-      border-radius: 14px;
+      border-radius: 16px;
       border: 1px solid var(--border);
       padding: 18px 20px 20px;
       margin-bottom: 18px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
     }
 
     section h2 {
@@ -170,15 +198,56 @@
       color: var(--text-muted);
     }
 
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
     .item-list {
       list-style: none;
       padding-left: 0;
-      margin: 4px 0 0;
+      margin: 6px 0 0;
       font-size: 0.93rem;
     }
 
     .item-list li {
       margin-bottom: 4px;
+    }
+
+    .pub-list,
+    .conf-list {
+      padding-left: 18px;
+      margin: 4px 0 0;
+      font-size: 0.93rem;
+    }
+
+    .pub-list li,
+    .conf-list li {
+      margin-bottom: 6px;
+    }
+
+    .pub-title {
+      font-weight: 500;
+    }
+
+    .pub-venue {
+      font-style: italic;
+    }
+
+    .research-block {
+      margin-bottom: 10px;
+    }
+
+    .research-block h3 {
+      margin: 6px 0 4px;
+      font-size: 0.98rem;
+    }
+
+    .research-block p {
+      margin: 0;
+      font-size: 0.93rem;
+      color: var(--text-muted);
     }
 
     footer {
@@ -210,7 +279,7 @@
   <!-- Hero -->
   <header class="hero">
     <div class="hero-photo">
-      <!-- Replace "harshadas.jpg" with your actual file name -->
+      <!-- Make sure this filename matches your uploaded photo -->
       <img src="harshadas.jpg" alt="Photo of Harshada Suryawanshi" />
     </div>
     <div class="hero-main">
@@ -219,9 +288,9 @@
         PhD Candidate · Materials Science &amp; Engineering · University of Michigan
       </div>
       <p class="hero-text">
-        I work on zinc metal anodes, non-aqueous electrolytes, and microelectrode-based
-        characterization to understand and control electrodeposition morphology for safer,
-        more efficient energy storage.
+        I work on zinc metal batteries, non-aqueous electrolytes, and microelectrode-based
+        diagnostics to understand and control metal electrodeposition morphology for safer,
+        more efficient energy storage systems.
       </p>
       <div class="hero-links">
         <a href="mailto:hrsurya@umich.edu">Email</a>
@@ -231,6 +300,9 @@
         <a href="https://scholar.google.com/citations?hl=en&user=xbPKGQ0AAAAJ" target="_blank" rel="noopener">
           Google Scholar
         </a>
+        <a href="Harshada_CV.pdf" target="_blank" rel="noopener" class="primary-link">
+          CV (PDF)
+        </a>
       </div>
     </div>
   </header>
@@ -239,28 +311,124 @@
   <nav>
     <a href="#research">Research</a>
     <a href="#publications">Publications</a>
-    <a href="#projects">Projects</a>
+    <a href="#conferences">Conferences</a>
     <a href="#leadership">Leadership</a>
     <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
   </nav>
 
-  <!-- Research (short) -->
+  <!-- Research (explanatory) -->
   <section id="research">
     <h2>Research</h2>
-    <ul class="item-list">
-      <li>Electrodeposition Study on Zn Metal Anodes – University of Michigan</li>
-      <li>Thermoelectric Materials and Devices – IIT Bombay</li>
-      <li>Magnesium Alloys for Automobile Industry – ARAI, Pune</li>
+
+    <div class="research-block">
+      <h3>Zn Electrodeposition for Metal Batteries · University of Michigan</h3>
+      <p>
+        I study zinc electrodeposition in ionic liquid and other non-aqueous electrolytes using
+        high-throughput microelectrode arrays. By operating under controlled current conditions and
+        imaging the resulting morphologies (mossy, compact, dendritic) with optical microscopy,
+        SEM, EDS, and XPS, I link deposition pathways to Coulombic efficiency and reversibility.
+        I use extracted diffusion coefficients and exchange current densities to build COMSOL
+        models that guide current-density windows for stable Zn cycling and improved Zn anode design.
+      </p>
+    </div>
+
+    <div class="research-block">
+      <h3>Thermoelectric Materials and Band Structure Modeling · IIT Bombay</h3>
+      <p>
+        Previously, I worked on n-type Mg<sub>3</sub>Sb<sub>0.6</sub>Bi<sub>1.4</sub> and related solid solutions
+        for waste-heat thermoelectrics. I combined synthesis, transport measurements (conductivity,
+        Seebeck, Hall), and multiband electronic band-structure modeling in MATLAB to generate 3D
+        predictive maps of doping, temperature, and zT. This helped identify broad high-zT regions,
+        improving temperature-averaged efficiency and widening the processing and stability window.
+      </p>
+    </div>
+
+    <div class="research-block">
+      <h3>Magnesium Alloys for Lightweight Automotive Applications · ARAI, Pune</h3>
+      <p>
+        I also evaluated AZ91D magnesium alloys as lightweight replacements for aluminum components
+        in automobiles. By correlating microstructure and mechanical properties and assessing creep
+        and corrosion behavior, I estimated that a 10% vehicle weight reduction can yield roughly
+        5% fuel savings.
+      </p>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul class="pub-list">
+      <li>
+        <span class="pub-title">
+          Suryawanshi, H. R., Wu, X., Melemed, A. M., Oh, D., Marbella, L. E., Singh, N.,
+          Dasgupta, N. P., Steingart, D. A., Li, Y. (2025).
+          Current-Controlled Zinc Electrodeposition Morphology in Ionic Liquid Electrolytes Using Microelectrode Arrays.
+        </span>
+        <br />
+        Submitted to <span class="pub-venue">ACS Nano</span>.
+        Preprint:&nbsp;
+        <a href="https://doi.org/10.26434/chemrxiv-2025-tdf14" target="_blank" rel="noopener">
+          10.26434/chemrxiv-2025-tdf14
+        </a>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          Suryawanshi, H., Agrawal, B., Kumari, N., &amp; Dasgupta, T. (2024).
+          Developing a Multiband Electronic Band Structure Model and Predictive Maps for Bismuth-Rich
+          Mg<sub>3</sub>(Sb<sub>1−x</sub>Bi<sub>x</sub>)<sub>2</sub> Thermoelectric Materials.
+        </span>
+        <br />
+        <span class="pub-venue">ACS Applied Materials &amp; Interfaces</span>, 16(2), 2263–2269.&nbsp;
+        <a href="https://doi.org/10.1021/ACSAMI.3C15019" target="_blank" rel="noopener">
+          10.1021/ACSAMI.3C15019
+        </a>
+      </li>
     </ul>
   </section>
 
-  <!-- Publications (still informative) -->
-  <section id="publications">
-    <h2>Publications &amp; Conferences</h2>
+  <!-- Conferences -->
+  <section id="conferences">
+    <h2>Conferences</h2>
+    <ul class="conf-list">
+      <li>
+        Oral: “Deciphering Zinc Deposition Pathways in Ionic Liquid Electrolytes: Morphological Evolution on Microelectrodes”,
+        <span class="pub-venue">248th ECS Meeting</span>, Chicago, 2025.
+      </li>
+      <li>
+        Oral: “High-Throughput Investigation of Zinc Electrodeposition Morphology Using Microelectrode Arrays”;
+        Session Chair, “A03: Electrolytes 0”,
+        <span class="pub-venue">247th ECS Meeting</span>, Montréal, 2025.
+      </li>
+      <li>
+        Poster: “Direct Observation of Overpotential in NMC Cathodes at Single- and Poly-crystalline Levels under Various Discharge Rates”,
+        <span class="pub-venue">Cell Symposia: Technology Barriers to Electric Vehicle Implementation</span>, 2024.
+      </li>
+      <li>
+        Oral: “Developing a Multiband Electronic Band Structure Model for Bismuth-Rich Mg<sub>3</sub>Sb<sub>2−x</sub>Bi<sub>x</sub> Thermoelectric Materials”,
+        <span class="pub-venue">ICMAT</span>, Singapore, 2023.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Leadership / PORs: names only -->
+  <section id="leadership">
+    <h2>Leadership</h2>
     <ul class="item-list">
-      <li>Current-controlled Zinc Electrodeposition Morphology in Non-aqueous Electrolyte using Microelectrode Arrays – Manuscript in preparation.</li>
-      <li>Multiband Electronic Band Structure Model for Bi-rich Mg₃(Sb₁₋ₓBiₓ)₂ – ACS Applied Materials &amp; Interfaces (2024).</li>
-      <li>Talks and posters at ECS 247th Meeting, Cell Symposia EV conference, and ICMAT 2023.</li>
+      <li>DOE Early Career Network Representative for ESRA Hub</li>
+      <li>Secretary – Electrochemical Society Student Chapter, University of Michigan</li>
+      <li>Head – Department Academic Mentorship Program (D-AMP), IIT Bombay</li>
+      <li>Horizons Coordinator – Mood Indigo, IIT Bombay</li>
+    </ul>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <h2>Education</h2>
+    <ul class="item-list">
+      <li>PhD Candidate, Materials Science &amp; Engineering – University of Michigan (2023–Present) · GPA: 4.0/4.0</li>
+      <li>B.Tech &amp; M.Tech, Metallurgical Engineering &amp; Materials Science (Minor: Electrical Engineering) – IIT Bombay (2018–2023) · GPA: 8.92/10</li>
     </ul>
   </section>
 
@@ -274,28 +442,8 @@
     </ul>
   </section>
 
-  <!-- Leadership / PORs: names only -->
-  <section id="leadership">
-    <h2>Leadership &amp; Teaching</h2>
-    <ul class="item-list">
-      <li>Secretary – Electrochemical Society Student Chapter, University of Michigan</li>
-      <li>Head – Department Academic Mentorship Program (D-AMP), IIT Bombay</li>
-      <li>Teaching Assistant – IIT Bombay</li>
-      <li>Horizons Coordinator – Mood Indigo, IIT Bombay</li>
-    </ul>
-  </section>
-
-  <!-- Education -->
-  <section id="education">
-    <h2>Education</h2>
-    <ul class="item-list">
-      <li>PhD Candidate, Materials Science &amp; Engineering – University of Michigan (2023–Present)</li>
-      <li>B.Tech &amp; M.Tech, Metallurgical Engineering &amp; Materials Science (Minor: Electrical Engineering) – IIT Bombay</li>
-    </ul>
-  </section>
-
   <footer>
-    © <span id="year"></span> Harshada Suryawanshi · Hosted on GitHub Pages
+    © <span id="year"></span> Harshada Suryawanshi · harshadarsuryawanshi.github.io
   </footer>
 </div>
 
@@ -307,7 +455,6 @@
   const toggleBtn = document.getElementById("themeToggle");
   const body = document.body;
 
-  // Load saved theme
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     body.classList.add("dark");
